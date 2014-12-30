@@ -4,6 +4,11 @@ Redmine::Plugin.register :k_chart do
   description 'This is a plugin for Redmine'
   version '0.0.1'
   url 'https://github.com/koryokoryo2002/redmine_k_chart'
-  permission :k_chart, { :k_chart => :index }, :public => true
+#  permission :k_chart, { :k_chart => :index }, :public => true
+
+  project_module :k_chart do
+    permission :view_k_chart, :k_chart => [:index,:velocity]
+  end
+
   menu :project_menu, :k_chart, { :controller => 'k_chart', :action => 'index' }, :caption => 'k_chart', :after => :activity, :param => :project_id
 end
