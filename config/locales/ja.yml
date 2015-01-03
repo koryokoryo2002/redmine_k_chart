@@ -1,3 +1,5 @@
 # Japanese strings go here for Rails i18n
 ja:
-  # my_label: "My label"
+   sidebar_menu: "グラフ種別"
+   index_graph_name: "Indexグラフ"
+   velocity_graph_name: "ベロシティグラフ"

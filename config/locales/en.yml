@@ -1,3 +1,5 @@
 # English strings go here for Rails i18n
 en:
-  # my_label: "My label"
+   sidebar_menu: "The kind of graph"
+   index_graph_name: "Index Graph"
+   velocity_graph_name: "Veloity Graph"

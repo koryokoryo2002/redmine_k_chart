@@ -6,8 +6,21 @@
 <% end %>
 
 <h2>KChartController#index</h2>
-<%= @project.issues %>
 <%= @project.versions %>
+<br><br>
+<%= @project.versions[0].fixed_issues %>
+<%= @version_names.to_json %>
+<%= @bug_issues_num %>
+<%= l(:default_tracker_bug) %>
+
+<%= javascript_tag do %>
+  var version_names = <%= raw @version_names.to_json %>
+
+  var bug_string = "<%= raw l(:default_tracker_bug) %>"
+  var dep_string = "<%= raw l(:default_tracker_feature) %>"
+  var bug_issues_num =  <%= raw @bug_issues_num.to_json %>
+  var dep_issues_num =  <%= raw @dep_issues_num.to_json %>
+<% end %>
 
 <script type="text/javascript">
 $(function () {
@@ -19,7 +32,7 @@ $(function () {
             text: 'Stacked column chart'
         },
         xAxis: {
-            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+            categories: version_names
         },
         yAxis: {
             min: 0,
@@ -65,17 +78,18 @@ $(function () {
             }
         },
         series: [{
-            name: 'John',
-            data: [5, 3, 4, 7, 2]
+            name: bug_string,
+            data: bug_issues_num
         }, {
-            name: 'Jane',
-            data: [2, 2, 3, 2, 1]
-        }, {
-            name: 'Joe',
-            data: [3, 4, 4, 2, 5]
+            name: dep_string,
+            data: dep_issues_num
         }]
     });
 });
 </script>
 
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<% content_for :sidebar do %>
+    <%= render :partial => 'sidebar' %>
+<% end %>
