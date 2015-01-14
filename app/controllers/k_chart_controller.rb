@@ -13,7 +13,7 @@ class KChartController < ApplicationController
     @dep_issues_num = []
     idx = 0
 
-    @project.versions.each do|version|
+    @project.versions.order("effective_date DESC").all.each do|version|
       @version_names.push version.name
       @bug_issues_num.push 0
       @dep_issues_num.push 0

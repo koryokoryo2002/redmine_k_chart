@@ -7,8 +7,9 @@
 
 <h2>KChartController#index</h2>
 <%= @project.issues %>
-<%= @project.versions %>
-
+<br><br>
+<%= @project.versions.order("id ASC").all %>
+<br><br>
 
 <script type="text/javascript">
 $(function () {
