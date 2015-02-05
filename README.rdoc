@@ -1,3 +1,15 @@
 = k_chart
 
-Description goes here
+=== highcharts
+The {highcharts}[http://www.highcharts.com/] required for this plugin.
+You need install it.
+
+== redmine plugin
+
+== install
+1.Download this to plugin your folder
+2.Get highcharts
+  assets/javascripts/highchart/highcharts.js
+  assets/javascripts/highchart/modules/exporting.js
+3.no nedd database migrate
+4.fun.
