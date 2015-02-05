@@ -9,23 +9,24 @@ class KChartController < ApplicationController
     @project = Project.find(params[:project_id])
 
     @version_names = []
-    @bug_issues_num = []
-    @dep_issues_num = []
-    idx = 0
+    @issues_cnt_info = {}
 
     @project.versions.limit(10).order("effective_date DESC").all.each do|version|
       @version_names.push version.name
-      @bug_issues_num.push 0
-      @dep_issues_num.push 0
+
+      issues_cnt_per_tracker = []
       
       version.fixed_issues.each do|issue|
-        if issue.tracker_id == 2
-          @dep_issues_num[idx] += 1
-        else
-          @bug_issues_num[idx] += 1
+        issues_cnt_per_tracker[issue.tracker_id] = 0 if issues_cnt_per_tracker[issue.tracker_id] == nil
+        issues_cnt_per_tracker[issue.tracker_id] += 1
+      end
+
+      issues_cnt_per_tracker.each_with_index do |cnt, idx|
+        if Tracker.find_by_id(idx) != nil
+          @issues_cnt_info[idx] = [] unless @issues_cnt_info.has_key?(idx)
+          @issues_cnt_info[idx] << cnt
         end
       end
-      idx += 1
     end
   end
 end
